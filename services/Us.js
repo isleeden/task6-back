@@ -8,6 +8,44 @@ const fe_m_names = require("../us/fe_m_names.json");
 const ma_f_names = require("../us/ma_f_names.json");
 const ma_l_names = require("../us/ma_l_names.json");
 const ma_m_names = require("../us/ma_m_names.json");
+const symbols = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+];
 const { getName } = require("../utils");
 
 class UsGenerateData extends GenerateData {
@@ -28,5 +66,6 @@ module.exports = new UsGenerateData(
   fe_l_names,
   ma_f_names,
   ma_m_names,
-  ma_l_names
+  ma_l_names,
+  symbols
 );

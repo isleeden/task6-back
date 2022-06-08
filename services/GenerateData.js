@@ -1,6 +1,7 @@
 const seedrandom = require("seedrandom");
 const { getBool, getName, getAddress, getPhone } = require("../utils");
 const { parse } = require("json2csv");
+const GenerateError = require("./GenerateError");
 
 module.exports = class GenerateData {
   constructor(
@@ -12,7 +13,8 @@ module.exports = class GenerateData {
     fe_l_names,
     ma_f_names,
     ma_m_names,
-    ma_l_names
+    ma_l_names,
+    symbols
   ) {
     this.phones = phones;
     this.cities = cities;
@@ -23,6 +25,8 @@ module.exports = class GenerateData {
     this.ma_f_names = ma_f_names;
     this.ma_m_names = ma_m_names;
     this.ma_l_names = ma_l_names;
+
+    this.GenerateError = new GenerateError(symbols);
   }
 
   generateName(seed) {
@@ -63,8 +67,9 @@ module.exports = class GenerateData {
     return getAddress(seed, this.cities, this.streets);
   }
 
-  generateData(userSeed, offset, limit) {
-    const result = [];
+  generateData(userSeed, offset, limit, errors) {
+    let result = [];
+
     for (let i = offset; i < parseInt(offset) + parseInt(limit); i++) {
       var rng = seedrandom(userSeed + offset + i);
       const seed = rng.int32();
@@ -76,6 +81,11 @@ module.exports = class GenerateData {
         address: this.generateAddress(seed),
       });
     }
+
+    result = result.map((obj) => {
+      for (let i = 0; i < errors; i++) this.GenerateError.makeError(obj);
+      return obj;
+    });
 
     return result;
   }

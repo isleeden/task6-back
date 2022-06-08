@@ -4,23 +4,23 @@ const Ua = require("./services/Ua");
 
 module.exports = class Controller {
   static getRuData(req, res) {
-    const { seed, limit, page } = req.query;
+    const { seed, limit, page, errors } = req.query;
     const offset = page * limit;
-    const data = Ru.generateData(seed, offset, limit);
+    const data = Ru.generateData(seed, offset, limit, errors);
     res.json(data);
   }
 
   static getUsData(req, res) {
-    const { seed, limit, page } = req.query;
+    const { seed, limit, page, errors } = req.query;
     const offset = page * limit;
-    const data = Us.generateData(seed, offset, limit);
+    const data = Us.generateData(seed, offset, limit, errors);
     res.json(data);
   }
 
   static getUaData(req, res) {
-    const { seed, limit, page } = req.query;
+    const { seed, limit, page, errors } = req.query;
     const offset = page * limit;
-    const data = Ua.generateData(seed, offset, limit);
+    const data = Ua.generateData(seed, offset, limit, errors);
     res.json(data);
   }
 
